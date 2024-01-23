@@ -90,11 +90,13 @@ function App() {
   }, [guesses]);
 
   useEffect(() => {
+    console.log(stages[1].name)
     const unicLetters = [...new Set(letters)]
-    if(guessesLetters.length === unicLetters.length && !stages[0].name){
+    if(guessesLetters.length !== 0){
+    if(guessesLetters.length === unicLetters.length){
       setScore((atualScore) => atualScore + 100);
       startGame();
-    }
+    }}
   }, [guessesLetters, letters, startGame]);
 
   const restart = () => {
