@@ -25,4 +25,23 @@
     width: 100px;
     background-color: #fff;
     color: #000;
+    font-weight: bold;
+}
+
+.letterContainer{
+    margin-bottom: 1.5em;
+}
+
+.letterContainer form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.letterContainer input{
+    height: 50px;
+    width: 50px;
+    margin-right: 1em;
+    font-size: 2em;
+    text-align: center;
 }

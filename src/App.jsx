@@ -25,9 +25,13 @@ const stages = [
 function App() {
   const [gameStage, setGameStage] = useState(stages[0].name)
   const [words] = useState(wordsList)
-  const [pickWord, setPickWord] = useState("");
-  const [pickCategory, setPickCategory] = useState("");
-  const [letter, setLetter] = useState([])
+  const [pickWord, setPickWord] = useState("")
+  const [pickCategory, setPickCategory] = useState("")
+  const [letters, setLetters] = useState([]);
+  const [guessesletters, setGuessesLetters] = useState([])
+  const [wrongLetters, setWrongLetters] = useState([])
+  const [guesses, setGuesses] = useState(5)
+  const [score, setScore] = useState(0)
 
 
   // Carregando os dados para o jogo
@@ -46,14 +50,12 @@ function App() {
   // iniciando o jogo
   const startGame = () => {
     const {word, category} = pickWordAndPickCategory();
-    let wordLetters = word.split('')
+    let wordLetters = word.split("");
     wordLetters = wordLetters.map((i) => i.toLowerCase());
-    setPickCategory(category)
-    setPickWord(word)
-    setLetter(letter)
-    setGameStage(stages[1].name)
-    console.log(category, word)
-    console.log(wordLetters)
+    setLetters(wordLetters);
+    setPickCategory(category);
+    setPickWord(word);
+    setGameStage(stages[1].name);
   }
 
 
@@ -71,7 +73,17 @@ function App() {
     <div className="App">
       {/*Renderização condicional, se o 'gameStage' for igual a 'start' ele exibe o componente <StartScreen/>*/}
         {gameStage === "start" && <StartScreen startGame={startGame}/>} 
-        {gameStage === "game" && <Game verifyLetter={verifyLetter}/>} 
+        {gameStage === "game" && (
+          <Game 
+          verifyLetter={verifyLetter}
+          pickWord={pickWord}
+          pickCategory={pickCategory}
+          letters={letters}
+          guessesletters={guessesletters}
+          wrongLetters={wrongLetters}
+          guesses={guesses}
+          score={score}
+          />)} 
         {gameStage === "end" && <GameOver restart={restart}/>} 
     </div>
   );
