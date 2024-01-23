@@ -65,7 +65,7 @@ function App() {
     const normalizedLetter = letter.toLowerCase();
 
    // Verificar se a letra já foi utilizada 
-   if ( guessesLetters.includes() || wrongLetters.includes(normalizedLetter)){
+   if ( guessesLetters.includes(normalizedLetter) || wrongLetters.includes(normalizedLetter)){ //refeito
         return;
    }
 
@@ -91,7 +91,7 @@ function App() {
 
   useEffect(() => {
     const unicLetters = [...new Set(letters)]
-    if(guessesLetters.length === unicLetters.length){
+    if(guessesLetters.length === unicLetters.length && !stages[0].name){
       setScore((atualScore) => atualScore + 100);
       startGame();
     }
