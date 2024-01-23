@@ -14,3 +14,15 @@ Bem-vindo ao Jogo de Adivinhação de Palavras em React! Este projeto é uma apl
 1. Clone o repositório para o seu ambiente local.
 2. npm install ou yarn install
 3. npm start  ou yarn start
+
+
+## Tela inicial
+![image](https://github.com/EduardoRibero/Game-react-secretword/assets/110073561/50bb1095-f20e-41b5-8efb-f72273c984b3)
+
+## Tela do Jogo
+![image](https://github.com/EduardoRibero/Game-react-secretword/assets/110073561/329fda6d-94e9-41ae-a090-9a408d55bf22)
+
+## Tela Final
+![image](https://github.com/EduardoRibero/Game-react-secretword/assets/110073561/aeae78c3-d8e2-4197-83b3-0684d6233fd7)
+
+
