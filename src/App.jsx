@@ -37,7 +37,7 @@ function App() {
 
 
   // Carregando os dados para o jogo
-  const pickWordAndPickCategory = () => {
+  const pickWordAndPickCategory = useCallback(() => {
     const categorys = Object.keys(words) // retorna para a variavel um array com as keys do objeto especificado.
 
     // Aqui é passado para a var category o array categorys em um indici aleatorio ultilizando o Math.random para gerar um numero aleatorio baseado no numero total de elementos keys do object e o Math.floor para arredondar o numero para um inteiro.
@@ -46,11 +46,12 @@ function App() {
     const word = words[category][Math.floor(Math.random() * words[category].length)]
 
     return {word, category};
-  }
+  }, [words]);
 
 
   // iniciando o jogo
-  const startGame = () => {
+  const startGame = useCallback(() => {
+    clearLetterStates();
     const {word, category} = pickWordAndPickCategory();
     let wordLetters = word.split("");
     wordLetters = wordLetters.map((i) => i.toLowerCase());
@@ -58,7 +59,7 @@ function App() {
     setPickCategory(category);
     setPickWord(word);
     setGameStage(stages[1].name);
-  }
+  }, [pickWordAndPickCategory]);
 
   const verifyLetter = (letter) => {
     const normalizedLetter = letter.toLowerCase();
@@ -70,16 +71,12 @@ function App() {
 
    if (letters.includes(normalizedLetter)){
       setGuessesLetters((actualGessesLetters) => [...actualGessesLetters,...normalizedLetter,]);
-      setScore((actualScore) => actualScore + 10)
+      setScore((actualScore) => actualScore + 50)
    }else{
       setWrongLetters((actualWrongLetters) => [...actualWrongLetters,...normalizedLetter,]);
       setGuesses((actualGuesses) => actualGuesses - 1)
    }
   }
-
-  console.log(guessesLetters)
-  console.log(wrongLetters)
-  console.log(letters)
 
   const clearLetterStates = () => {
     setGuessesLetters([])
@@ -92,6 +89,14 @@ function App() {
       setGameStage(stages[2].name)
     }
   }, [guesses]);
+
+  useEffect(() => {
+    const unicLetters = [...new Set(letters)]
+    if(guessesLetters.length === unicLetters.length){
+      setScore((atualScore) => atualScore + 100);
+      startGame();
+    }
+  }, [guessesLetters, letters, startGame]);
 
   const restart = () => {
     setGuesses(guessesQnt)
@@ -115,7 +120,7 @@ function App() {
           guesses={guesses}
           score={score}
           />)} 
-        {gameStage === "end" && <GameOver restart={restart}/>} 
+        {gameStage === "end" && <GameOver restart={restart} score={score}/>} 
     </div>
   );
 }
