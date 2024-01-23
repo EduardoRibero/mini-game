@@ -1,7 +1,7 @@
 import { useState, useRef} from "react"
 import "./Game.css"
 
-const Game = ({verifyLetter, pickCategory, pickWord, letters, guessesLetters, wrongLetters, guesses, score}) => {
+const Game = ({verifyLetter, pickCategory, letters, guessesLetters, wrongLetters, guesses, score}) => {
 
   const [letter, setLetter] = useState("");
   const letterInputRef = useRef(null)

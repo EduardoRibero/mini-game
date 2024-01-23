@@ -21,7 +21,7 @@ const stages = [
   {id: 3, name: "end"}
 ]
 
-const guessesQnt = 3;
+const guessesQnt = 10;
 
 function App() {
   const [gameStage, setGameStage] = useState(stages[0].name)
@@ -71,7 +71,6 @@ function App() {
 
    if (letters.includes(normalizedLetter)){
       setGuessesLetters((actualGessesLetters) => [...actualGessesLetters,...normalizedLetter,]);
-      setScore((actualScore) => actualScore + 50)
    }else{
       setWrongLetters((actualWrongLetters) => [...actualWrongLetters,...normalizedLetter,]);
       setGuesses((actualGuesses) => actualGuesses - 1)
@@ -85,7 +84,7 @@ function App() {
 
   useEffect(() => {
     if(guesses <= 0){
-      clearLetterStates()
+      clearLetterStates();
       setGameStage(stages[2].name)
     }
   }, [guesses]);
