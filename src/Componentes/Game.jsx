@@ -1,7 +1,7 @@
 import { useState, useRef} from "react"
 import "./Game.css"
 
-const Game = ({verifyLetter, pickCategory, pickWord, letters, guessesletters, wrongLetters, guesses, score}) => {
+const Game = ({verifyLetter, pickCategory, pickWord, letters, guessesLetters, wrongLetters, guesses, score}) => {
 
   const [letter, setLetter] = useState("");
   const letterInputRef = useRef(null)
@@ -30,7 +30,7 @@ const Game = ({verifyLetter, pickCategory, pickWord, letters, guessesletters, wr
 
       <div className="wordContainer">
         {letters.map((letter, i) =>
-          guessesletters.includes(letter) ? (
+          guessesLetters.includes(letter) ? (
             <span className="letter" key={i}>
               {letter}
             </span>
@@ -53,7 +53,7 @@ const Game = ({verifyLetter, pickCategory, pickWord, letters, guessesletters, wr
           Letras ja utilizadas:
         </p>
         {wrongLetters.map((letra, i) => (
-          <span key={i}>{letra}</span>
+          <span key={i}>{letra}, </span>
         ))}
       </div>
     </div>
