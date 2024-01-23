@@ -59,8 +59,9 @@ function App() {
   }
 
 
-  const verifyLetter = () => {
-    setGameStage(stages[2].name)
+  const verifyLetter = (letter) => {
+    console.log(letter);
+    
   }
 
 
