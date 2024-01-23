@@ -17,7 +17,7 @@ Bem-vindo ao Jogo de Adivinhação de Palavras em React! Este projeto é uma apl
 
 
 ## Tela inicial
-![image](https://github.com/EduardoRibero/Game-react-secretword/assets/110073561/50bb1095-f20e-41b5-8efb-f72273c984b3)
+![image](https://github.com/EduardoRibero/Game-react-secretword/assets/110073561/856026a6-f24b-4f5e-8f94-94c692295be3)
 
 ## Tela do Jogo
 ![image](https://github.com/EduardoRibero/Game-react-secretword/assets/110073561/329fda6d-94e9-41ae-a090-9a408d55bf22)
