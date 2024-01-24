@@ -20,7 +20,7 @@ const Game = ({verifyLetter, pickCategory, letters, guessesLetters, wrongLetters
           <span>Pontuação: {score}</span>
       </p>
 
-      <h1>Advinhe a palavra:</h1>
+      <h1>Adivinhe a palavra:</h1>
 
       <h3 className="tip">
           Dica sobre a palavra: <span>{pickCategory}</span>
@@ -50,7 +50,7 @@ const Game = ({verifyLetter, pickCategory, letters, guessesLetters, wrongLetters
 
       <div className="wrongLetterContainer">
         <p>
-          Letras ja utilizadas:
+          Letras já utilizadas:
         </p>
         {wrongLetters.map((letra, i) => (
           <span key={i}>{letra}, </span>
