@@ -1,29 +1,22 @@
-// CSS
 import './App.css';
-
-
-// REACT
-import { useCallback, useEffect, useState} from "react";
-
-
-// DATA
+import { useCallback, useEffect, useState } from "react";
 import { wordsList } from './data/Words';
-
-
-// COMPONENTES
 import StartScreen from './Componentes/StartScreen';
 import Game from './Componentes/Game';
 import GameOver from './Componentes/GameOver';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
-const stages = [
-  {id: 1, name: "start"},
-  {id: 2, name: "game"},
-  {id: 3, name: "end"}
-]
-
-const guessesQnt = 10;
 
 function App() {
+  const stages = [
+    { id: 1, name: "start" },
+    { id: 2, name: "game" },
+    { id: 3, name: "end" }
+  ]
+  const guessesQnt = 10;
   const [gameStage, setGameStage] = useState(stages[0].name)
   const [words] = useState(wordsList)
   const [pickWord, setPickWord] = useState("")
@@ -33,7 +26,7 @@ function App() {
   const [wrongLetters, setWrongLetters] = useState([])
   const [guesses, setGuesses] = useState(guessesQnt)
   const [score, setScore] = useState(0)
-  
+
 
 
   // Carregando os dados para o jogo
@@ -45,14 +38,14 @@ function App() {
 
     const word = words[category][Math.floor(Math.random() * words[category].length)]
 
-    return {word, category};
+    return { word, category };
   }, [words]);
 
 
   // iniciando o jogo
   const startGame = useCallback(() => {
     clearLetterStates();
-    const {word, category} = pickWordAndPickCategory();
+    const { word, category } = pickWordAndPickCategory();
     let wordLetters = word.split("");
     wordLetters = wordLetters.map((i) => i.toLowerCase());
     setLetters(wordLetters);
@@ -64,17 +57,17 @@ function App() {
   const verifyLetter = (letter) => {
     const normalizedLetter = letter.toLowerCase();
 
-   // Verificar se a letra já foi utilizada 
-   if ( guessesLetters.includes(normalizedLetter) || wrongLetters.includes(normalizedLetter)){ //refeito
-        return;
-   }
+    // Verificar se a letra já foi utilizada 
+    if (guessesLetters.includes(normalizedLetter) || wrongLetters.includes(normalizedLetter)) { //refeito
+      return;
+    }
 
-   if (letters.includes(normalizedLetter)){
-      setGuessesLetters((actualGessesLetters) => [...actualGessesLetters,...normalizedLetter,]);
-   }else{
-      setWrongLetters((actualWrongLetters) => [...actualWrongLetters,...normalizedLetter,]);
+    if (letters.includes(normalizedLetter)) {
+      setGuessesLetters((actualGessesLetters) => [...actualGessesLetters, ...normalizedLetter,]);
+    } else {
+      setWrongLetters((actualWrongLetters) => [...actualWrongLetters, ...normalizedLetter,]);
       setGuesses((actualGuesses) => actualGuesses - 1)
-   }
+    }
   }
 
   const clearLetterStates = () => {
@@ -83,21 +76,22 @@ function App() {
   }
 
   useEffect(() => {
-    if(guesses <= 0){
+    if (guesses <= 0) {
       clearLetterStates();
       setGameStage(stages[2].name)
     }
   }, [guesses]);
 
-  useEffect(() => {
+  setTimeout(useEffect(() => {
     console.log(stages[1].name)
     const unicLetters = [...new Set(letters)]
-    if(guessesLetters.length !== 0){
-    if(guessesLetters.length === unicLetters.length){
-      setScore((atualScore) => atualScore + 100);
-      startGame();
-    }}
-  }, [guessesLetters, letters, startGame]);
+    if (guessesLetters.length !== 0) {
+      if (guessesLetters.length === unicLetters.length) {
+        setScore((atualScore) => atualScore + 100);
+        startGame();
+      }
+    }
+  }, [guessesLetters, letters, startGame]), 10000)
 
   const restart = () => {
     setGuesses(guessesQnt)
@@ -108,20 +102,26 @@ function App() {
 
   return (
     <div className="App">
-      {/*Renderização condicional, se o 'gameStage' for igual a 'start' ele exibe o componente <StartScreen/>*/}
-        {gameStage === "start" && <StartScreen startGame={startGame}/>} 
-        {gameStage === "game" && (
-          <Game 
-          verifyLetter={verifyLetter}
-          pickWord={pickWord}
-          pickCategory={pickCategory}
-          letters={letters}
-          guessesLetters={guessesLetters}
-          wrongLetters={wrongLetters}
-          guesses={guesses}
-          score={score}
-          />)} 
-        {gameStage === "end" && <GameOver restart={restart} score={score}/>} 
+      <Container>
+        <Row>
+          <Col>
+            {/*Renderização condicional, se o 'gameStage' for igual a 'start' ele exibe o componente <StartScreen/>*/}
+            {gameStage === "start" && <StartScreen startGame={startGame} />}
+            {gameStage === "game" && (
+              <Game
+                verifyLetter={verifyLetter}
+                pickWord={pickWord}
+                pickCategory={pickCategory}
+                letters={letters}
+                guessesLetters={guessesLetters}
+                wrongLetters={wrongLetters}
+                guesses={guesses}
+                score={score}
+              />)}
+            {gameStage === "end" && <GameOver restart={restart} score={score} />}
+          </Col>
+        </Row>
+      </Container>
     </div>
   );
 }
