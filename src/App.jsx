@@ -5,18 +5,16 @@ import StartScreen from './Componentes/StartScreen';
 import Game from './Componentes/Game';
 import GameOver from './Componentes/GameOver';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 
+
+const stages = [
+  { id: 1, name: "start" },
+  { id: 2, name: "game" },
+  { id: 3, name: "end" }
+]
+const guessesQnt = 10;
 
 function App() {
-  const stages = [
-    { id: 1, name: "start" },
-    { id: 2, name: "game" },
-    { id: 3, name: "end" }
-  ]
-  const guessesQnt = 10;
   const [gameStage, setGameStage] = useState(stages[0].name)
   const [words] = useState(wordsList)
   const [pickWord, setPickWord] = useState("")
@@ -101,10 +99,7 @@ function App() {
 
 
   return (
-    <div className="App">
-      <Container>
-        <Row>
-          <Col>
+          <div className="App">
             {/*Renderização condicional, se o 'gameStage' for igual a 'start' ele exibe o componente <StartScreen/>*/}
             {gameStage === "start" && <StartScreen startGame={startGame} />}
             {gameStage === "game" && (
@@ -119,10 +114,7 @@ function App() {
                 score={score}
               />)}
             {gameStage === "end" && <GameOver restart={restart} score={score} />}
-          </Col>
-        </Row>
-      </Container>
-    </div>
+          </div>
   );
 }
 

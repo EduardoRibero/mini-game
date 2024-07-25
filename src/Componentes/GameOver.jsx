@@ -1,11 +1,12 @@
 import "./GameOver.css"
+import Button from 'react-bootstrap/Button';
 
 const GameOver = ({restart, score}) => {
   return (
     <div>
-        <h1>Fim de Jogo!</h1>
-        <h2>Sua pontuação foi: <span>{score}</span></h2>
-        <button onClick={restart}>Reiniciar o jogo</button>
+        <h1 className="text-white">Fim de Jogo!</h1>
+        <h2 className="text-white">Sua pontuação foi: <span>{score}</span></h2>
+        <Button className="mt-4" onClick={restart}>Reiniciar o jogo</Button>
     </div>
   )
 }
