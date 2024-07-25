@@ -1,4 +1,4 @@
-# Jogo de Adivinhação de Palavras em React
+# Jogo de Adivinhação de Palavras
 
 ## Descrição
 Bem-vindo ao Jogo de Adivinhação de Palavras em React! Este projeto é uma aplicação simples em React onde os jogadores podem tentar adivinhar palavras, receber dicas, acumular pontuações e reiniciar o jogo.
